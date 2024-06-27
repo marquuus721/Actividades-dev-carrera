@@ -1,0 +1,71 @@
+/*Recursion con suceciones:
+El usuario ingresa dos elementos de una sucesion de numeros, (los valores que ingresa el usuario pueden o no ser consecutivos.). 
+La aplicacion debe tomar esos valores y generar una sucesion geometrica o una sucesion aritmetica segun corresponda. Los valores ingresados por el usuario seran corresponderan al primer y el ultimo elemento de la sucesion
+Mostrar por pantalla los datos generados de izquierda a derecha y de derecha a izquierda
+*/
+
+package recursionensucesion;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class RecursionEnSucesion {
+
+    
+    // Función para generar sucesión aritmética
+    public static void generarSucesionAritmetica(int inicio, int fin, int diferencia, ArrayList<Integer> sucesion) {
+        if (inicio == fin) {
+            sucesion.add(inicio);
+        } else {
+            sucesion.add(inicio);
+            generarSucesionAritmetica(inicio + diferencia, fin, diferencia, sucesion);
+        }
+    }
+
+    // Función para generar sucesión geométrica
+    public static void generarSucesionGeometrica(int inicio, int fin, int razon, ArrayList<Integer> sucesion) {
+        if (inicio == fin) {
+            sucesion.add(inicio);
+        } else {
+            sucesion.add(inicio);
+            generarSucesionGeometrica(inicio * razon, fin, razon, sucesion);
+        }
+    }
+    
+    // Función para determinar si es una sucesión aritmética
+    public static boolean esAritmetica(int inicio, int fin, int segundo) {
+        int diferencia = segundo - inicio;
+        return (fin - inicio) % diferencia == 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese el primer elemento de la sucesión:");
+        int primerElemento = scanner.nextInt();
+        System.out.println("Ingrese el segundo elemento de la sucesión:");
+        int segundoElemento = scanner.nextInt();
+        System.out.println("Ingrese el último elemento de la sucesión:");
+        int ultimoElemento = scanner.nextInt();
+        
+        ArrayList<Integer> sucesion = new ArrayList<>();
+        
+        if (esAritmetica(primerElemento, ultimoElemento, segundoElemento)) {
+            int diferencia = segundoElemento - primerElemento;
+            generarSucesionAritmetica(primerElemento, ultimoElemento, diferencia, sucesion);
+        } else {
+            int razon = segundoElemento / primerElemento;
+            generarSucesionGeometrica(primerElemento, ultimoElemento, razon, sucesion);
+        }
+
+        System.out.println("Sucesión de izquierda a derecha:");
+        for (int num : sucesion) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+        
+        System.out.println("Sucesión de derecha a izquierda:");
+        for (int i = sucesion.size() - 1; i >= 0; i--) {
+            System.out.print(sucesion.get(i) + " ");
+        }
+    }
+}
