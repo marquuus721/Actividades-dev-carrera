@@ -1,0 +1,30 @@
+package sucfibbo;
+
+import java.util.Scanner;
+
+
+public class SucFibbo {
+
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner (System.in);
+        
+        System.out.println("Ingrese su valor inicial para la sucesion de fibbonaci");
+        int a = teclado.nextInt();
+        System.out.println("Ingresa su  segundo valor para la sucesion de fibbonaci");
+        int b = teclado.nextInt();
+        System.out.println("Ingresa la cantidad de termonos para la sucesion");
+        int n = teclado.nextInt();
+        
+        System.out.println("Sucesión de Fibonacci hasta la posición " + n + ":");
+        System.out.print(a + ", " + b);
+
+        for (int i = 2; i < n; i++) {
+            int next = a + b;
+            System.out.print(", " + next);
+            a = b;
+            b = next;
+        }
+        
+        
+    }
+}
